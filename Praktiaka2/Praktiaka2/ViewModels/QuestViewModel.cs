@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Praktiaka2.Models;
@@ -9,27 +10,41 @@ namespace Praktiaka2.ViewModels
     public class QuestViewModel : INotifyPropertyChanged
     {
         private readonly DataService _dataService = new DataService();
-        private List<Question> _questionsList;
-        private string _activeQuestionText = "Завантаження...";
+        private ObservableCollection<Question> _questions;
+        private User _currentUser;
+        private string _activeQuestionText;
 
         public QuestViewModel()
         {
-            _questionsList = _dataService.GetQuestions();
-            if (_questionsList != null && _questionsList.Count > 0)
+            // Ініціалізація користувача
+            CurrentUser = new User { Name = "Гравець", Score = 0 };
+
+            // Завантаження питань в ObservableCollection
+            var data = _dataService.GetQuestions();
+            Questions = new ObservableCollection<Question>(data);
+
+            if (Questions.Count > 0)
             {
-                // Присвоюємо значення через властивість, щоб спрацював Notify
-                ActiveQuestionText = _questionsList[0].Text;
+                ActiveQuestionText = Questions[0].Text;
             }
+        }
+
+        public User CurrentUser
+        {
+            get => _currentUser;
+            set { _currentUser = value; OnPropertyChanged(); }
+        }
+
+        public ObservableCollection<Question> Questions
+        {
+            get => _questions;
+            set { _questions = value; OnPropertyChanged(); }
         }
 
         public string ActiveQuestionText
         {
             get => _activeQuestionText;
-            set
-            {
-                _activeQuestionText = value;
-                OnPropertyChanged();
-            }
+            set { _activeQuestionText = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
