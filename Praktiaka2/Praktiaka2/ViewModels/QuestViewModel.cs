@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Praktiaka2.Models;
@@ -12,21 +11,15 @@ namespace Praktiaka2.ViewModels
         private readonly DataService _dataService = new DataService();
         private ObservableCollection<Question> _questions;
         private User _currentUser;
+        private int _currentQuestionIndex = 0;
         private string _activeQuestionText;
 
         public QuestViewModel()
         {
-            // Ініціалізація користувача
             CurrentUser = new User { Name = "Гравець", Score = 0 };
-
-            // Завантаження питань в ObservableCollection
             var data = _dataService.GetQuestions();
             Questions = new ObservableCollection<Question>(data);
-
-            if (Questions.Count > 0)
-            {
-                ActiveQuestionText = Questions[0].Text;
-            }
+            UpdateQuestion();
         }
 
         public User CurrentUser
@@ -45,6 +38,29 @@ namespace Praktiaka2.ViewModels
         {
             get => _activeQuestionText;
             set { _activeQuestionText = value; OnPropertyChanged(); }
+        }
+
+       
+        public Question CurrentQuestion => (Questions != null && _currentQuestionIndex < Questions.Count)
+            ? Questions[_currentQuestionIndex] : null;
+
+        
+        public void UpdateQuestion()
+        {
+            if (CurrentQuestion != null)
+                ActiveQuestionText = CurrentQuestion.Text;
+        }
+
+        
+        public bool NextQuestion()
+        {
+            if (_currentQuestionIndex < Questions.Count - 1)
+            {
+                _currentQuestionIndex++;
+                UpdateQuestion();
+                return true;
+            }
+            return false; 
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

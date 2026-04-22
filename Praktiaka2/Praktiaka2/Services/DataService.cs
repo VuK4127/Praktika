@@ -8,17 +8,17 @@ namespace Praktiaka2.Services
 {
     public class DataService
     {
-        // Шлях до нашого JSON-файлу з питаннями
+        
         private readonly string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "questions.json");
 
-        // Метод для зчитування списку питань
+        
         public List<Question> GetQuestions()
         {
             try
             {
                 if (!File.Exists(_filePath))
                 {
-                    return new List<Question>(); // Повертаємо порожній список, якщо файлу немає
+                    return new List<Question>(); 
                 }
 
                 string json = File.ReadAllText(_filePath);

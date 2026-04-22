@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-namespace Praktiaka2.Views
+﻿namespace Praktiaka2.Views
 {
-    /// <summary>
-    /// Interaction logic for FinishPage.xaml
-    /// </summary>
-    public partial class FinishPage : Page
+    public partial class FinishPage : System.Windows.Controls.Page
     {
         public FinishPage()
         {
             InitializeComponent();
+        }
+
+        public FinishPage(string playerName, int score) : this()
+        {
+            
+            ResultText.Text = $"{playerName}, вітаємо! \nВаш результат: {score} балів";
+        }
+
+        private void ToMenu_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new StartPage());
         }
     }
 }

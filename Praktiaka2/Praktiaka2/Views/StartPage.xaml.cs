@@ -13,7 +13,7 @@ namespace Praktiaka2.Views
 
         private void StartGame_Click(object sender, RoutedEventArgs e)
         {
-            // Перехід на сторінку гри
+            
             NavigationService.Navigate(new GamePage());
         }
     }
