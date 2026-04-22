@@ -1,24 +1,48 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;2
+﻿using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;2121
 
 namespace Praktiaka2
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void StartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(UserNameInput.Text))
+            {
+                StatusMessage.Text = "Введіть ім'я перед початком!";
+                StatusMessage.Foreground = Brushes.Red;
+            }
+            else
+            {
+                QuestionDisplay.Text = "Як правильно пишеться слово: (пр..красний)?";
+                StatusMessage.Text = $"Удачі, {UserNameInput.Text}!";
+                StatusMessage.Foreground = Brushes.Blue;
+            }
+        }
+
+        private void CheckBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserAnswerInput.Text.ToLower().Trim() == "прекрасний")
+            {
+                StatusMessage.Text = "Правильно! Ви молодець!";
+                StatusMessage.Foreground = Brushes.Green;
+            }
+            else
+            {
+                StatusMessage.Text = "Помилка. Спробуйте ще раз.";
+                StatusMessage.Foreground = Brushes.Red;
+            }
+        }
+
+        private void NextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            StatusMessage.Text = "Перехід до наступного питання...";
+            StatusMessage.Foreground = Brushes.Black;
         }
     }
 }
