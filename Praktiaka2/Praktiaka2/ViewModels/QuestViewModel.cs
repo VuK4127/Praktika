@@ -9,23 +9,27 @@ namespace Praktiaka2.ViewModels
     public class QuestViewModel : INotifyPropertyChanged
     {
         private readonly DataService _dataService = new DataService();
-        private List<Question> _questions;
-        private int _currentIndex = 0;
-        private string _currentQuestionText;
+        private List<Question> _questionsList;
+        private string _activeQuestionText = "Завантаження...";
 
         public QuestViewModel()
         {
-            _questions = _dataService.GetQuestions();
-            if (_questions.Count > 0)
+            _questionsList = _dataService.GetQuestions();
+            if (_questionsList != null && _questionsList.Count > 0)
             {
-                CurrentQuestionText = _questions[_currentIndex].Text;
+                // Присвоюємо значення через властивість, щоб спрацював Notify
+                ActiveQuestionText = _questionsList[0].Text;
             }
         }
 
-        public string CurrentQuestionText
+        public string ActiveQuestionText
         {
-            get => _currentQuestionText;
-            set { _currentQuestionText = value; OnPropertyChanged(); }
+            get => _activeQuestionText;
+            set
+            {
+                _activeQuestionText = value;
+                OnPropertyChanged();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
