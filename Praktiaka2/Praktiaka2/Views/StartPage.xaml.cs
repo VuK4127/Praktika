@@ -23,7 +23,7 @@ namespace Praktiaka2.Views
             string themeName = (existingTheme == null || existingTheme.Source.OriginalString.Contains("Light"))
                 ? "DarkTheme.xaml" : "LightTheme.xaml";
 
-            // Використовуємо Pack URI для стабільності
+            
             string uriPath = $"pack://application:,,,/Resources/{themeName}";
 
             app.Resources.MergedDictionaries.Insert(0, new ResourceDictionary

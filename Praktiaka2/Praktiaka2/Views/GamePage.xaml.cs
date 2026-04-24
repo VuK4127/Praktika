@@ -38,7 +38,7 @@ namespace Praktiaka2.Views
             }
             else
             {
-                // Передаємо ім'я та бали на фінальну сторінку
+                
                 NavigationService.Navigate(new FinishPage(_viewModel.CurrentUser.Name, _viewModel.CurrentUser.Score));
             }
         }

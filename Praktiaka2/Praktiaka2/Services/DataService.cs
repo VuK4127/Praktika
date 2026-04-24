@@ -10,7 +10,7 @@ namespace Praktiaka2.Services
     {
         public List<Question> GetQuestions()
         {
-            // Найнадійніший шлях до файлу в папці Data
+            
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "questions.json");
 
             if (!File.Exists(path))
