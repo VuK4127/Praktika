@@ -8,26 +8,18 @@ namespace Praktiaka2.Services
 {
     public class DataService
     {
-        
-        private readonly string _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "questions.json");
-
-        
         public List<Question> GetQuestions()
         {
-            try
-            {
-                if (!File.Exists(_filePath))
-                {
-                    return new List<Question>(); 
-                }
+            // Найнадійніший шлях до файлу в папці Data
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "questions.json");
 
-                string json = File.ReadAllText(_filePath);
-                return JsonSerializer.Deserialize<List<Question>>(json) ?? new List<Question>();
-            }
-            catch (Exception)
+            if (!File.Exists(path))
             {
-                return new List<Question>();
+                throw new FileNotFoundException($"Файл не знайдено за шляхом: {path}");
             }
+
+            string jsonString = File.ReadAllText(path);
+            return JsonSerializer.Deserialize<List<Question>>(jsonString) ?? new List<Question>();
         }
     }
 }

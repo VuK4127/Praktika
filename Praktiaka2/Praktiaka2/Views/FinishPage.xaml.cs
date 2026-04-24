@@ -1,21 +1,20 @@
-﻿namespace Praktiaka2.Views
+﻿using System.Windows;
+using System.Windows.Controls;
+
+namespace Praktiaka2.Views
 {
-    public partial class FinishPage : System.Windows.Controls.Page
+    public partial class FinishPage : Page
     {
-        public FinishPage()
+        public FinishPage() => InitializeComponent();
+
+        public FinishPage(string name, int score) : this()
         {
-            InitializeComponent();
+            ResultText.Text = $"{name}, ти набрав {score} балів!";
         }
 
-        public FinishPage(string playerName, int score) : this()
+        private void ToMenu_Click(object sender, RoutedEventArgs e)
         {
-            
-            ResultText.Text = $"{playerName}, вітаємо! \nВаш результат: {score} балів";
-        }
-
-        private void ToMenu_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            NavigationService?.Navigate(new StartPage());
+            NavigationService.Navigate(new StartPage());
         }
     }
 }

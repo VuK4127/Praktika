@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 using Praktiaka2.ViewModels;
 
 namespace Praktiaka2.Views
@@ -12,7 +11,6 @@ namespace Praktiaka2.Views
         public GamePage()
         {
             InitializeComponent();
-            
             _viewModel = (QuestViewModel)this.DataContext;
         }
 
@@ -20,40 +18,28 @@ namespace Praktiaka2.Views
         {
             if (_viewModel.CurrentQuestion == null) return;
 
-            
-            string userAnswer = AnswerInput.Text.Trim().ToLower();
-            string correctAnswer = _viewModel.CurrentQuestion.CorrectAnswer.ToLower();
-
-            if (userAnswer == correctAnswer)
+            if (AnswerInput.Text.Trim().ToLower() == _viewModel.CurrentQuestion.CorrectAnswer.ToLower())
             {
-                MessageBox.Show("Правильно! Нараховано +10 балів.", "Успіх");
+                MessageBox.Show("Правильно!");
                 _viewModel.CurrentUser.Score += 10;
-
                 NextBtn.IsEnabled = true;
                 CheckBtn.IsEnabled = false;
             }
-            else
-            {
-                MessageBox.Show("Неправильно. Спробуйте ще раз!", "Помилка");
-            }
+            else MessageBox.Show("Спробуйте ще раз!");
         }
 
         private void NextBtn_Click(object sender, RoutedEventArgs e)
         {
             if (_viewModel.NextQuestion())
             {
-                
                 AnswerInput.Clear();
                 CheckBtn.IsEnabled = true;
                 NextBtn.IsEnabled = false;
             }
             else
             {
-                
-                string finalName = _viewModel.CurrentUser.Name;
-                int finalScore = _viewModel.CurrentUser.Score;
-
-                NavigationService.Navigate(new FinishPage(finalName, finalScore));
+                // Передаємо ім'я та бали на фінальну сторінку
+                NavigationService.Navigate(new FinishPage(_viewModel.CurrentUser.Name, _viewModel.CurrentUser.Score));
             }
         }
     }

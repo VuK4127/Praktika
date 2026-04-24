@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Praktiaka2.Models;
@@ -9,49 +10,44 @@ namespace Praktiaka2.ViewModels
     public class QuestViewModel : INotifyPropertyChanged
     {
         private readonly DataService _dataService = new DataService();
-        private ObservableCollection<Question> _questions;
-        private User _currentUser;
+        private ObservableCollection<Question> _questions = null!;
+        private User _currentUser = null!;
+        private string _activeQuestionText = string.Empty;
         private int _currentQuestionIndex = 0;
-        private string _activeQuestionText;
 
         public QuestViewModel()
         {
             CurrentUser = new User { Name = "Гравець", Score = 0 };
-            var data = _dataService.GetQuestions();
-            Questions = new ObservableCollection<Question>(data);
-            UpdateQuestion();
+            LoadQuestions();
         }
 
-        public User CurrentUser
+        private void LoadQuestions()
         {
-            get => _currentUser;
-            set { _currentUser = value; OnPropertyChanged(); }
+            try
+            {
+                var data = _dataService.GetQuestions();
+                Questions = new ObservableCollection<Question>(data);
+                UpdateQuestion();
+            }
+            catch
+            {
+                Questions = new ObservableCollection<Question>();
+                ActiveQuestionText = "Помилка: файл Data/questions.json не знайдено!";
+            }
         }
 
-        public ObservableCollection<Question> Questions
-        {
-            get => _questions;
-            set { _questions = value; OnPropertyChanged(); }
-        }
+        public User CurrentUser { get => _currentUser; set { _currentUser = value; OnPropertyChanged(); } }
+        public ObservableCollection<Question> Questions { get => _questions; set { _questions = value; OnPropertyChanged(); } }
+        public string ActiveQuestionText { get => _activeQuestionText; set { _activeQuestionText = value; OnPropertyChanged(); } }
 
-        public string ActiveQuestionText
-        {
-            get => _activeQuestionText;
-            set { _activeQuestionText = value; OnPropertyChanged(); }
-        }
-
-       
-        public Question CurrentQuestion => (Questions != null && _currentQuestionIndex < Questions.Count)
+        public Question? CurrentQuestion => (Questions != null && _currentQuestionIndex < Questions.Count)
             ? Questions[_currentQuestionIndex] : null;
 
-        
         public void UpdateQuestion()
         {
-            if (CurrentQuestion != null)
-                ActiveQuestionText = CurrentQuestion.Text;
+            if (CurrentQuestion != null) ActiveQuestionText = CurrentQuestion.Text;
         }
 
-        
         public bool NextQuestion()
         {
             if (_currentQuestionIndex < Questions.Count - 1)
@@ -60,13 +56,11 @@ namespace Praktiaka2.ViewModels
                 UpdateQuestion();
                 return true;
             }
-            return false; 
+            return false;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
     }
 }

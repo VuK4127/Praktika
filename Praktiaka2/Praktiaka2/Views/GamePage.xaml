@@ -8,63 +8,26 @@
         <vm:QuestViewModel/>
     </Page.DataContext>
 
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Grid Background="{DynamicResource WindowBackground}">
+        <StackPanel Margin="20">
+            <Border Background="{DynamicResource CardBackground}" CornerRadius="10" Padding="15" Margin="0,0,0,20">
+                <DockPanel>
+                    <TextBlock Text="{Binding CurrentUser.Name}" Foreground="{DynamicResource MainTextBrush}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding CurrentUser.Score, StringFormat='Бали: {0}'}" Foreground="#1A73E8" HorizontalAlignment="Right"/>
+                </DockPanel>
+            </Border>
 
-        <Border Grid.Row="0" Background="#E9ECEF" CornerRadius="10" Padding="15" Margin="0,0,0,20">
-            <DockPanel>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                    <TextBlock Text="Гравець: " VerticalAlignment="Center" FontWeight="Bold"/>
-                    <TextBox Text="{Binding CurrentUser.Name, UpdateSourceTrigger=PropertyChanged}" 
-                             Width="150" Margin="5,0,0,0" 
-                             Style="{StaticResource ModernTextBoxStyle}"/>
-                </StackPanel>
+            <TextBlock Text="{Binding ActiveQuestionText}" FontSize="22" Foreground="{DynamicResource MainTextBrush}" 
+                       TextWrapping="Wrap" Margin="0,20" TextAlignment="Center"/>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="Ваші бали: " VerticalAlignment="Center" FontWeight="Bold"/>
-                    <TextBlock Text="{Binding CurrentUser.Score}" 
-                               FontSize="20" FontWeight="ExtraBold" 
-                               Foreground="{StaticResource PrimaryBlueBrush}" Margin="5,0,0,0"/>
-                </StackPanel>
-            </DockPanel>
-        </Border>
+            <TextBox x:Name="AnswerInput" Style="{StaticResource ModernTextBoxStyle}" Margin="0,10"/>
 
-        <Border Grid.Row="1" Background="White" CornerRadius="15" Padding="30">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="15" Direction="270" ShadowDepth="2" Opacity="0.1"/>
-            </Border.Effect>
-            <TextBlock Text="{Binding ActiveQuestionText}" 
-                       FontSize="22" FontWeight="Medium" 
-                       TextWrapping="Wrap" TextAlignment="Center" Foreground="#212529"/>
-        </Border>
-
-        <StackPanel Grid.Row="2" VerticalAlignment="Center" MaxWidth="500">
-            <TextBlock Text="Ваша відповідь:" Margin="0,0,0,10" 
-                       FontWeight="SemiBold" Foreground="#495057"/>
-            <TextBox x:Name="AnswerInput" 
-                     Style="{StaticResource ModernTextBoxStyle}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="CheckBtn" Content="ПЕРЕВІРИТИ" Click="CheckBtn_Click" 
+                        Style="{StaticResource MainButtonStyle}" Background="#34A853" Margin="5"/>
+                <Button x:Name="NextBtn" Content="НАСТУПНЕ" Click="NextBtn_Click" 
+                        Style="{StaticResource MainButtonStyle}" Background="#FBBC05" Margin="5" IsEnabled="False"/>
+            </StackPanel>
         </StackPanel>
-
-        <UniformGrid Grid.Row="3" Columns="2" HorizontalAlignment="Center">
-            <Button x:Name="CheckBtn" 
-                    Content="ПЕРЕВІРИТИ" 
-                    Style="{StaticResource MainButtonStyle}"
-                    Background="{StaticResource SuccessGreenBrush}"
-                    Margin="10" 
-                    Click="CheckBtn_Click"/>
-
-            <Button x:Name="NextBtn" 
-                    Content="НАСТУПНЕ" 
-                    Style="{StaticResource MainButtonStyle}"
-                    Background="{StaticResource WarningYellowBrush}"
-                    Margin="10" 
-                    Click="NextBtn_Click" 
-                    IsEnabled="False"/>
-        </UniformGrid>
     </Grid>
 </Page>
