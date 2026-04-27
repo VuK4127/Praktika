@@ -17,7 +17,7 @@ namespace Praktiaka2.ViewModels
 
         public QuestViewModel()
         {
-            CurrentUser = new User { Name = "Гравець", Score = 0 };
+            CurrentUser = new User { Name = UserProfile.Nickname, Score = 0 };
             LoadQuestions();
         }
 

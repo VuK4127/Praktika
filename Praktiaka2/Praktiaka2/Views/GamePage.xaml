@@ -17,15 +17,19 @@
                 </DockPanel>
             </Border>
 
-            <TextBlock Text="{Binding ActiveQuestionText}" FontSize="22" Foreground="{DynamicResource MainTextBrush}" 
+            <TextBlock Text="{Binding ActiveQuestionText}" FontSize="22" Foreground="{DynamicResource MainTextBrush}"
                        TextWrapping="Wrap" Margin="0,20" TextAlignment="Center"/>
 
-            <TextBox x:Name="AnswerInput" Style="{StaticResource ModernTextBoxStyle}" Margin="0,10"/>
+            <TextBox x:Name="AnswerInput" Style="{StaticResource ModernTextBoxStyle}"
+                     Margin="0,10" KeyDown="AnswerInput_KeyDown"/>
+
+            <TextBlock x:Name="StatusText" FontSize="18" FontWeight="Bold"
+                       HorizontalAlignment="Center" Margin="0,10"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="CheckBtn" Content="ПЕРЕВІРИТИ" Click="CheckBtn_Click" 
+                <Button x:Name="CheckBtn" Content="ПЕРЕВІРИТИ" Click="CheckBtn_Click"
                         Style="{StaticResource MainButtonStyle}" Background="#34A853" Margin="5"/>
-                <Button x:Name="NextBtn" Content="НАСТУПНЕ" Click="NextBtn_Click" 
+                <Button x:Name="NextBtn" Content="НАСТУПНЕ" Click="NextBtn_Click"
                         Style="{StaticResource MainButtonStyle}" Background="#FBBC05" Margin="5" IsEnabled="False"/>
             </StackPanel>
         </StackPanel>

@@ -14,7 +14,7 @@ namespace Praktiaka2.Views
 
         private void ToMenu_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new StartPage());
+            NavigationService.Navigate(new MenuPage());
         }
     }
 }

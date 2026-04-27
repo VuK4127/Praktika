@@ -7,8 +7,7 @@ namespace Praktiaka2
         public MainWindow()
         {
             InitializeComponent();
-            
-            MainFrame.Navigate(new Views.StartPage());
+            MainFrame.Navigate(new Views.MenuPage());
         }
     }
 }

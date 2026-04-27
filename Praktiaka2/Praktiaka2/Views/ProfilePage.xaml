@@ -1,0 +1,41 @@
+﻿<Page x:Class="Praktiaka2.Views.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Профіль">
+
+    <Grid Background="{DynamicResource WindowBackground}">
+        <Border Background="{DynamicResource CardBackground}" CornerRadius="15"
+                Padding="30" VerticalAlignment="Center" HorizontalAlignment="Center"
+                MinWidth="300">
+            <StackPanel>
+
+                <TextBlock Text="ПРОФІЛЬ" FontSize="26" FontWeight="Bold"
+                           Foreground="{DynamicResource MainTextBrush}"
+                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                <Ellipse Width="100" Height="100" HorizontalAlignment="Center">
+                    <Ellipse.Fill>
+                        <ImageBrush x:Name="AvatarBrush" Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <Button Content="Обрати аватар" Style="{StaticResource MainButtonStyle}"
+                        Background="#6C757D" Width="180" Margin="0,10,0,20"
+                        HorizontalAlignment="Center" Click="ChangeAvatar_Click"/>
+
+                <TextBlock Text="Нікнейм:" Foreground="{DynamicResource MainTextBrush}"
+                           FontWeight="Bold" Margin="0,0,0,5"/>
+
+                <TextBox x:Name="NicknameBox" Style="{StaticResource ModernTextBoxStyle}"
+                         FontSize="16" Padding="8" Margin="0,0,0,20"/>
+
+                <Button Content="Зберегти" Style="{StaticResource MainButtonStyle}"
+                        Background="#34A853" Margin="0,0,0,8" Click="Save_Click"/>
+
+                <Button Content="Назад" Style="{StaticResource MainButtonStyle}"
+                        Background="#6C757D" Click="Back_Click"/>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

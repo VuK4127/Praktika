@@ -1,0 +1,27 @@
+﻿<Page x:Class="Praktiaka2.Views.ModePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Режим гри">
+
+    <Grid Background="{DynamicResource WindowBackground}">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <TextBlock Text="ОБЕРІТЬ РЕЖИМ" FontSize="36" FontWeight="Bold"
+                       Foreground="{DynamicResource MainTextBrush}"
+                       HorizontalAlignment="Center" Margin="0,0,0,40"/>
+
+            <Button Content="КЛАСИЧНИЙ" Style="{StaticResource MainButtonStyle}"
+                    Background="#1A73E8" Width="260" Margin="8" Click="Classic_Click"/>
+
+            <Button Content="ДОДАЄТЬСЯ СКОРО" Style="{StaticResource MainButtonStyle}"
+                    Background="#6C757D" Width="260" Margin="8" IsEnabled="False"/>
+
+            <Button Content="ДОДАЄТЬСЯ СКОРО" Style="{StaticResource MainButtonStyle}"
+                    Background="#6C757D" Width="260" Margin="8" IsEnabled="False"/>
+
+            <Button Content="НАЗАД" Style="{StaticResource MainButtonStyle}"
+                    Background="#DC3545" Width="260" Margin="8" Click="Back_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>

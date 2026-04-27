@@ -1,0 +1,37 @@
+﻿<Page x:Class="Praktiaka2.Views.MenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Меню">
+
+    <Grid Background="{DynamicResource WindowBackground}">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <Ellipse Width="90" Height="90" HorizontalAlignment="Center" Margin="0,0,0,8">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="AvatarBrush" Stretch="UniformToFill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <TextBlock x:Name="NicknameText" FontSize="20" FontWeight="Bold"
+                       Foreground="{DynamicResource MainTextBrush}"
+                       HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+            <TextBlock Text="МОВНИЙ КВЕСТ" FontSize="40" FontWeight="Bold"
+                       Foreground="{DynamicResource MainTextBrush}"
+                       HorizontalAlignment="Center" Margin="0,0,0,30"/>
+
+            <Button Content="ПОЧАТИ ГРУ" Style="{StaticResource MainButtonStyle}"
+                    Background="#1A73E8" Width="220" Margin="8" Click="Play_Click"/>
+
+            <Button Content="ПРОФІЛЬ" Style="{StaticResource MainButtonStyle}"
+                    Background="#6F42C1" Width="220" Margin="8" Click="Profile_Click"/>
+
+            <Button Content="ЗМІНИТИ ТЕМУ 🌓" Style="{StaticResource MainButtonStyle}"
+                    Background="#6C757D" Width="220" Margin="8" Click="Theme_Click"/>
+
+            <Button Content="ВИЙТИ" Style="{StaticResource MainButtonStyle}"
+                    Background="#DC3545" Width="220" Margin="8" Click="Exit_Click"/>
+
+        </StackPanel>
+    </Grid>
+</Page>
